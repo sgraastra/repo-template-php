@@ -27,6 +27,7 @@
   },
   "extra": {
     "hooks": {
+      "pre-commit": "sh .github/hooks/pre-commit",
       "pre-push": "composer run phpunit && composer run phpstan && composer run phpcs && composer run phpmd && composer run phpmd:tests"
     }
   }
