@@ -6,7 +6,12 @@
 
   <description>Studyportals PHPMD (next-gen)</description>
 
-  <rule ref="rulesets/cleancode.xml"/>
+  <!-- "Undefined variable" is (better) covered by PHPStan -->
+
+  <rule ref="rulesets/cleancode.xml">
+    <exclude name="UndefinedVariable"/>
+  </rule>
+
   <rule ref="rulesets/codesize.xml"/>
   <rule ref="rulesets/controversial.xml/Superglobals"/>
   <rule ref="rulesets/design.xml"/>

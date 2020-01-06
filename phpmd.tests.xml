@@ -6,11 +6,14 @@
 
   <description>Studyportals PHPMD (next-gen; for test-suites)</description>
 
+  <!-- "Undefined variable" is (better) covered by PHPStan -->
+
   <rule ref="rulesets/cleancode.xml">
+    <exclude name="UndefinedVariable"/>
     <exclude name="StaticAccess"/>
   </rule>
 
-  <!-- Static access is only allowed for Mockery -->
+  <!-- "Static access" is only allowed for Mockery -->
 
   <rule ref="rulesets/cleancode.xml/StaticAccess">
     <properties>
