@@ -1,4 +1,3 @@
-/.github/repo-template/revision
 /vendor/
 cghooks.lock
 .phpunit.result.cache
