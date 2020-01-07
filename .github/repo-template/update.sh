@@ -11,7 +11,7 @@ if [ -f .github/repo-template/revision ]; then
   if [ "$currentRevision" != "$usedRevision" ]; then
     git stash --quiet --include-untracked
     git diff "$usedRevision"..repo-template-php/master | git apply
-    git add -- *.xml
+    git add .
     git commit -e -m "Merge branch 'repo-template-php/master' into Woei" -m "Repository was at $usedRevision now at $currentRevision"
     git stash pop --quiet
   fi
