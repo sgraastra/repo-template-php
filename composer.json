@@ -1,7 +1,9 @@
 {
-  "name": "studyportals/repo-template-php",
-  "type": "template",
-  "require": {},
+  "config": {
+    "platform": {
+      "php": "7.2"
+    }
+  },
   "require-dev": {
     "phpunit/phpunit": "^8.5",
     "mockery/mockery": "^1.3",
@@ -22,7 +24,10 @@
     "phpcbf": "phpcbf --colors -p -n src/ tests/",
     "phpmd": "phpmd src/ text phpmd.xml",
     "phpmd:tests": "phpmd tests/ text phpmd.tests.xml",
-    "post-install-cmd": "cghooks add --ignore-lock",
+    "post-install-cmd": [
+      "cghooks add --ignore-lock",
+      "sh .github/repo-template/update.sh"
+    ],
     "post-update-cmd": "cghooks update"
   },
   "extra": {
