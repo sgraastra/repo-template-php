@@ -11,7 +11,8 @@ if [ -f .github/repo-template/revision ]; then
   if [ "$currentRevision" != "$usedRevision" ]; then
     git stash --quiet --include-untracked
 
-    git diff "$usedRevision"..repo-template-php/master -- . ':(exclude)README.md' | git apply
+    git diff "$usedRevision"..repo-template-php/master -- . ':(exclude)README.md' \
+      ':(exclude).github/repo-template/*' | git apply
     echo "$currentRevision" > .github/repo-template/revision
 
     commitTitle="Merge branch 'repo-template-php/master' into $(git rev-parse --abbrev-ref HEAD)"
@@ -25,7 +26,13 @@ if [ -f .github/repo-template/revision ]; then
   fi
 
 else
-   echo "$currentRevision" > .github/repo-template/revision
+  echo "$currentRevision" > .github/repo-template/revision
+
+  commitTitle="Init 'repo-template-php' automatic updates"
+  commitMessage="At studyportals/repo-template-php@$currentRevision"
+
+  git add .github/repo-template/revision
+  git commit -e -m "$commitTitle" -m "$commitMessage"
 fi
 
 git remote remove repo-template-php
