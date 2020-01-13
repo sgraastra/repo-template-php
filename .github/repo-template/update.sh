@@ -11,13 +11,22 @@ if [ -f .github/repo-template/revision ]; then
   if [ "$currentRevision" != "$usedRevision" ]; then
     git stash --quiet --include-untracked
 
-    git diff "$usedRevision"..repo-template-php/master -- . ':(exclude)README.md' \
-      ':(exclude).github/repo-template/*' | git apply
+    gitApplyOutput=$(git diff "$usedRevision"..repo-template-php/master -- . \
+      ':(exclude)README.md' \
+      ':(exclude).github/repo-template/*' \
+      ':(exclude)*.gitkeep' | git apply 2>&1)
     echo "$currentRevision" > .github/repo-template/revision
 
     commitTitle="Merge branch 'repo-template-php/master' into $(git rev-parse --abbrev-ref HEAD)"
     commitMessage="Was at studyportals/repo-template-php@$usedRevision"
     commitMessage="$(printf "%s\n%s" "$commitMessage," "now at studyportals/repo-template-php@$currentRevision.")"
+
+    if [ ! -z "$gitApplyOutput" ]; then
+      mergeErrorTitle="The following errors were encountered while merging:"
+      mergeErrorFooter="Please manually inspect/update the files mentioned above."
+      commitMessage="$(printf "%s\n\n%s\n\n%s\n\n%s" "$commitMessage" "$mergeErrorTitle" \
+        "$gitApplyOutput" "$mergeErrorFooter")"
+    fi
 
     git add .
     git commit -e -m "$commitTitle" -m "$commitMessage"
