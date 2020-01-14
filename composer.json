@@ -24,14 +24,12 @@
     "phpcbf": "phpcbf --colors -p -n src/ tests/",
     "phpmd": "phpmd src/ text phpmd.xml",
     "phpmd:tests": "phpmd tests/ text phpmd.tests.xml",
-    "post-install-cmd": [
-      "cghooks add --ignore-lock",
-      "sh .github/repo-template/update.sh"
-    ],
+    "post-install-cmd": "cghooks add --ignore-lock",
     "post-update-cmd": "cghooks update"
   },
   "extra": {
     "hooks": {
+      "post-checkout": "sh .github/repo-template/update.sh",
       "pre-commit": "sh .github/hooks/pre-commit",
       "pre-push": "composer run phpunit && composer run phpstan && composer run phpcs && composer run phpmd && composer run phpmd:tests"
     }

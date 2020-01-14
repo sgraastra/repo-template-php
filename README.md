@@ -9,14 +9,21 @@ Create a new repository in GitHub using `repo-template-php` as your template.
 Once you've checked out your new repository, make the following modifications:
 
 1. Add proper `name`- and `description`-properties to your [`composer.json`]()
-2. Remove [`README.md`]() (and ideally replace it with your own read me)
+2. Remove [`README.md`]() (and ideally replace it with your own `README.md`)
 3. Update `CC_TEST_REPORTER_ID=...` in [`.travis.yml`]() with a proper Code
    Climate ID to enable code-coverage reporting &ndash; if you don't want to use
    Code Climate, remove [`.travis.yml`]()
+4. Execute `composer install`
 
-When you've made the above modifications, run `composer install`. A new commit
-to initialise the [auto-update functionality](#automatic-updates) is
-automatically created for you; its commit message should pop up.
+### Initialise Automatic Updates
+
+When you've finished with the above steps, execute
+`sh .github/repo-template/update.sh -f` to initialise the
+[automatic update functionality](#automatic-updates). A commit is automatically
+created for you; its commit message should pop up.
+
+⚠ On **Windows**, the `sh` command _might_ fail &ndash; in that case execute
+`.\.github\repo-template\update.sh -f` instead.
 
 ## The Coding Standard
 
@@ -60,12 +67,13 @@ The [`.github/repo-template/update.sh`](.github/repo-template/update.sh)
 shell-script is intended to keep your repository's copy of the template
 configuration up-to-date with main template on GitHub.
 
-Whenever your run `composer install` it attempts to automatically merge changes
-from the main template on GitHub into your repository.
+It is set up as a Git `post-checkout` hook using `composer-git-hooks`. Whenever
+you switch to a branch that is _not_ `master` or `develop`, the script will
+attempt to automatically update the template configuration.
 
 The functionality is still somewhat experimental. If it gets on your nerve, feel
-free to update [`composer.json`](composer.json) and remove the
-`sh .github/repo-template/update.sh`-entry from `post-install-cmd`.
+free to update [`composer.json`](composer.json) and remove the `post-checkout`
+line under `extra:{hooks}`.
 
 ## Caveats
 

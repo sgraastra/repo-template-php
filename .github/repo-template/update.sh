@@ -1,5 +1,30 @@
 #!/bin/sh
 
+while getopts ":f" opt; do
+  case $opt in
+    f)
+      forceUpdate=true
+      ;;
+    \?)
+      echo "repo-template-php: Invalid option -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ "$forceUpdate" != true ]; then
+
+  branch="$(git rev-parse --abbrev-ref HEAD)"
+
+  if [ "$branch" = "master" ] || [ "$branch" = "develop" ]; then
+    echo "repo-template-php: On master-/develop-branch; skipping auto-update"
+    exit
+  fi
+
+fi
+
+echo "repo-template-php: Attempting auto-update"
+
 git remote add repo-template-php git@github.com:studyportals/repo-template-php.git
 git fetch --quiet repo-template-php
 
@@ -32,6 +57,9 @@ if [ -f .github/repo-template/revision ]; then
     git commit -e -m "$commitTitle" -m "$commitMessage"
 
     git stash pop --quiet
+
+  else
+    echo "repo-template-php: No updates available"
   fi
 
 else
