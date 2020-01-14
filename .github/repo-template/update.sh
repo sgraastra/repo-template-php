@@ -12,6 +12,16 @@ while getopts ":f" opt; do
   esac
 done
 
+# Exit when checkout-type is 0 (retrieving files from index)
+
+checkoutType=$3
+
+if [ "$checkoutType" = 0 ]; then
+  exit
+fi
+
+# Force update (supplied "-f" flag) regardless of being on master-/develop-branch
+
 if [ "$forceUpdate" != true ]; then
 
   branch="$(git rev-parse --abbrev-ref HEAD)"

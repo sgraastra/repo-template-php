@@ -29,7 +29,7 @@
   },
   "extra": {
     "hooks": {
-      "post-checkout": "sh .github/repo-template/update.sh",
+      "post-checkout": "sh .github/repo-template/update.sh \"$@\"",
       "pre-commit": "sh .github/hooks/pre-commit",
       "pre-push": "composer run phpunit && composer run phpstan && composer run phpcs && composer run phpmd && composer run phpmd:tests"
     }
