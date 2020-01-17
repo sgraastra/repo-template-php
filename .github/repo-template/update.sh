@@ -36,7 +36,7 @@ fi
 echo "repo-template-php: Attempting auto-update"
 
 git remote add repo-template-php git@github.com:studyportals/repo-template-php.git
-git fetch --quiet repo-template-php
+git fetch --quiet repo-template-php 2> /dev/null
 
 currentRevision=$(git show-ref --hash repo-template-php/master)
 
