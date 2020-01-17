@@ -64,7 +64,7 @@ if [ -f .github/repo-template/revision ]; then
     fi
 
     git add .
-    git commit -e -m "$commitTitle" -m "$commitMessage"
+    git commit --no-verify -e -m "$commitTitle" -m "$commitMessage"
 
     git stash pop --quiet
 
@@ -79,7 +79,7 @@ else
   commitMessage="At studyportals/repo-template-php@$currentRevision"
 
   git add .github/repo-template/revision
-  git commit -e -m "$commitTitle" -m "$commitMessage"
+  git commit --no-verify -e -m "$commitTitle" -m "$commitMessage"
 fi
 
 git remote remove repo-template-php
