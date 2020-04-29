@@ -1,29 +1,59 @@
-# PHP Template Repository (RFC-5)
+# Repository Template for PHP 7.2+
 
 For use with newly created **PHP 7.2+** projects &ndash; for a good example see
-[**PageModels**](https://github.com/studyportals/PageModels).
+[**CMS**](https://github.com/studyportals/CMS).
+
+- [Using the Template](#using-the-template)
+  - [Initialise Automatic Updates (`update.sh`)](#initialise-automatic-updates-updatesh)
+  - [Dependabot](#dependabot)
+- [The Coding Standard](#the-coding-standard)
+- [Automatic Updates](#automatic-updates)
+- [Caveats](#caveats)
 
 ## Using the Template
 
 Create a new repository in GitHub using `repo-template-php` as your template.
 Once you've checked out your new repository, make the following modifications:
 
-1. Add proper `name`- and `description`-properties to your [`composer.json`]()
-2. Remove [`README.md`]() (and ideally replace it with your own `README.md`)
-3. Update `CC_TEST_REPORTER_ID=...` in [`.travis.yml`]() with a proper Code
-   Climate ID to enable code-coverage reporting &ndash; if you don't want to use
-   Code Climate, remove [`.travis.yml`]()
-4. Execute `composer install`
+1. Add proper `name`- and `description`-properties to your
+   [`composer.json`](./composer.json)
+2. Remove [`README.md`](./README.md) (and ideally replace it with your own
+   `README.md`)
+3. Update `CC_TEST_REPORTER_ID=...` in [`.travis.yml`](./.travis.yml) with a
+   Code Climate ID to enable code-coverage reporting. If you do **not** wish to
+   use Code Climate:
+   - _Remove_ [`.codeclimate.yml`](./.codeclimate.yml)
+   - Update the `before_script`- and `after_script`-sections in
+     [`.travis.yml`](./.travis.yml) &ndash; only the `echo 'error_reporting...`
+     line should remain.
+4. Execute `composer install` and _commit_ `composer.lock`
+5. Have a look at [`.dependatbot/config.yml`](./.dependabot/config.yml) if you
+   wish to [fine-tune Dependabot](https://dependabot.com/docs/config-file/)
 
-### Initialise Automatic Updates
+You will need to push using `--no-verify` after you do the above &ndash; there
+is a pre-push hook in place that prevents you from accidentally pushing to
+either the `develop` or `master` branch.
+
+### Initialise Automatic Updates (`update.sh`)
 
 When you've finished with the above steps, execute
 `sh .github/repo-template/update.sh -f` to initialise the
 [automatic update functionality](#automatic-updates). A commit is automatically
 created for you; its commit message should pop up.
 
-⚠ On **Windows**, the `sh` command _might_ fail &ndash; in that case execute
-`.\.github\repo-template\update.sh -f` instead.
+⚠ On **Windows**, the `sh` command _might_ fail &ndash; in that case manually
+execute `.\.github\repo-template\update.sh -f` using Git Bash.
+
+### Dependabot
+
+To prevent [Dependabot](https://dependabot.com/) from updating your libraries
+too proactively (i.e. by automatically bumping them to new,
+backwards-incompatible, versions), it is recommended you use
+[caret version ranges](https://getcomposer.org/doc/articles/versions.md#caret-version-range-)
+in your [`composer.json`](./composer.json).
+
+This will instruct Dependabot to only update patch-revisions; which generally
+speaking should contain non-breaking changes.
 
 ## The Coding Standard
 
