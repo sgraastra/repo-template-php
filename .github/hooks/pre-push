@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -eu
+
+composer run phpunit
+composer run phpstan
+composer run phpcs
+composer run phpmd
+composer run phpmd:tests

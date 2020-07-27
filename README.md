@@ -19,15 +19,8 @@ Once you've checked out your new repository, make the following modifications:
    [`composer.json`](./composer.json)
 2. Remove [`README.md`](./README.md) (and ideally replace it with your own
    `README.md`)
-3. Update `CC_TEST_REPORTER_ID=...` in [`.travis.yml`](./.travis.yml) with a
-   Code Climate ID to enable code-coverage reporting. If you do **not** wish to
-   use Code Climate:
-   - _Remove_ [`.codeclimate.yml`](./.codeclimate.yml)
-   - Update the `before_script`- and `after_script`-sections in
-     [`.travis.yml`](./.travis.yml) &ndash; only the `echo 'error_reporting...`
-     line should remain.
-4. Execute `composer install` and _commit_ `composer.lock`
-5. Have a look at [`.dependatbot/config.yml`](./.dependabot/config.yml) if you
+3. Execute `composer install` and _commit_ `composer.lock`
+4. Have a look at [`.dependatbot/config.yml`](./.dependabot/config.yml) if you
    wish to [fine-tune Dependabot](https://dependabot.com/docs/config-file/)
 
 You will need to push using `--no-verify` after you do the above &ndash; there
