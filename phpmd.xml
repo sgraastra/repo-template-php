@@ -6,6 +6,8 @@
 
   <description>Studyportals PHPMD (next-gen)</description>
 
+  <exclude-pattern>tests\*</exclude-pattern>
+
   <!-- "Undefined variable" is (better) covered by PHPStan -->
 
   <rule ref="rulesets/cleancode.xml">
@@ -16,6 +18,4 @@
   <rule ref="rulesets/controversial.xml/Superglobals"/>
   <rule ref="rulesets/design.xml"/>
   <rule ref="rulesets/unusedcode.xml"/>
-
-  <exclude-pattern>tests\*</exclude-pattern>
 </ruleset>
