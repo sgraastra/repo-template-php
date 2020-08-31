@@ -8,6 +8,5 @@ script:
   - composer phpstan
   - composer phpcs
   - composer phpmd
-  - composer phpmd:tests
 before_script:
   - echo 'error_reporting = E_ALL' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini

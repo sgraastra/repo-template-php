@@ -29,9 +29,12 @@
 
   <!-- Enforce the use of a "strict_types=1" declaration at the start of the
        file; including strict formatting (no spaces around the "=") and new-line
-       requirements in line with PSR-12 -->
+       requirements in line with PSR-12.
+       The second entry (/github/workspace/...) is required the GitHub
+       Super-Linter; there's no better solution available at the moment. See:
+       https://github.com/studyportals/repo-template-php/pull/8 -->
 
-  <config name="installed_paths" value="../../slevomat/coding-standard"/>
+  <config name="installed_paths" value="../../slevomat/coding-standard,/github/workspace/vendor/slevomat/coding-standard"/>
 
   <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
     <properties>

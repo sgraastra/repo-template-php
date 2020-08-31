@@ -1,0 +1,27 @@
+name: GitHub Super-Linter
+on:
+  push:
+    branches: [master]
+  pull_request:
+jobs:
+  build:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Composer install
+        uses: php-actions/composer@v1
+      - name: Lint codebase
+        uses: docker://github/super-linter:v3
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          VALIDATE_BASH: true
+          VALIDATE_EDITORCONFIG: true
+          VALIDATE_JSON: true
+          VALIDATE_PHP_PHPCS: true
+          VALIDATE_PHP_PHPSTAN: true
+          VALIDATE_XML: true
+          VALIDATE_YAML: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
